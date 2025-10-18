@@ -22,9 +22,9 @@
     .avatar{width:64px; height:64px; border-radius:50%; object-fit:cover; box-shadow:0 4px 16px rgba(0,0,0,.25);} 
     h1{font-size:32px; line-height:1.1; margin:0}
     .sub{color:var(--muted); margin-top:6px; font-size:15px}
-    .cta{display:flex; gap:10px; flex-wrap:wrap}
-    .btn{appearance:none; border:none; padding:12px 16px; border-radius:12px; background:var(--accent); color:white; font-weight:600; cursor:pointer; box-shadow:var(--shadow)}
-    .btn.ghost{background:transparent; border:1px solid #2a2f39; color:var(--fg)}
+    .cta{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .btn{appearance:none; border:none; padding:12px 16px; border-radius:12px; background:var(--accent); color:white; cursor:pointer; box-shadow:var(--shadow); font-family:'Open Sans', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-weight:400; font-size:15px;}
+    .btn.ghost{background:transparent; border:1px solid #2a2f39; color:var(--fg);}
 
     .hero{background:linear-gradient(135deg, rgba(47,179,105,.15), transparent 60%); padding:26px; border-radius:var(--radius); box-shadow:var(--shadow)}
 
@@ -47,15 +47,18 @@
     /* Slide viewer */
     .slides{display:none; position:relative; background:var(--card); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
     .slides.active{display:block}
-    .slide-img{width:100%; height:520px; object-fit:cover; display:block}
+    .slide-img{width:100%; height:380px; object-fit:cover; display:block}
     .slide-info{display:flex; justify-content:space-between; align-items:center; padding:12px 14px}
     .nav{position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 8px}
     .nav button{border:none; width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.35); color:#fff; font-size:18px; cursor:pointer}
 
+    .flag{display:inline-grid; place-items:center; width:36px; height:36px; border-radius:50%; text-decoration:none; box-shadow:var(--shadow); background:transparent; padding:0;}
+    .flag svg{width:36px; height:36px; display:block; border-radius:50%; overflow:hidden;}
+    .flag:hover{transform:translateY(-1px)}
     footer{color:var(--muted); text-align:center; padding:36px 0}
     .links{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
 
-    /* Lightbox */
+    /* Lightbox (stili residui, non usata) */
     .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.75); display:none; align-items:center; justify-content:center; padding:20px;}
     .lightbox.open{display:flex}
     .lightbox img{max-width:90vw; max-height:80vh; border-radius:16px; box-shadow:var(--shadow)}
@@ -72,8 +75,44 @@
         </div>
       </div>
       <div class="cta">
-        <a class="btn ghost" href="CV_WalterFerrulli.pdf" target="_blank" rel="noopener">Scarica CV</a>
+        <a class="btn ghost" href="./CV_WalterFerrulli.pdf" target="_blank" rel="noopener">Scarica CV</a>
         <button class="btn" id="contactBtn" aria-haspopup="dialog">Contatti</button>
+        <!-- IT flag (inline SVG, no external assets needed) -->
+        <a class="flag" href="https://ferrulliwalter.github.io/Portfolio_ita/" target="_blank" rel="noopener" aria-label="Italiano">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs><clipPath id="r"><circle cx="18" cy="18" r="18"/></clipPath></defs>
+            <g clip-path="url(#r)">
+              <rect width="36" height="36" fill="#fff"/>
+              <rect width="12" height="36" x="0" fill="#009246"/>
+              <rect width="12" height="36" x="24" fill="#CE2B37"/>
+            </g>
+          </svg>
+        </a>
+        <!-- GB flag (Union Jack, stroke-based for clarity) -->
+        <a class="flag" href="https://ferrulliwalter.github.io/Portfolio_eng/" target="_blank" rel="noopener" aria-label="English">
+          <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <defs><clipPath id="c"><circle cx="18" cy="18" r="18"/></clipPath></defs>
+            <g clip-path="url(#c)">
+              <rect width="36" height="36" fill="#012169"/>
+              <!-- white diagonals -->
+              <g stroke="#FFF" stroke-width="8" stroke-linecap="square">
+                <path d="M0 0 L36 36"/>
+                <path d="M36 0 L0 36"/>
+              </g>
+              <!-- red diagonals -->
+              <g stroke="#C8102E" stroke-width="4" stroke-linecap="square">
+                <path d="M0 0 L36 36"/>
+                <path d="M36 0 L0 36"/>
+              </g>
+              <!-- central cross white -->
+              <rect x="0" y="14" width="36" height="8" fill="#FFF"/>
+              <rect x="14" y="0" width="8" height="36" fill="#FFF"/>
+              <!-- central cross red -->
+              <rect x="0" y="16" width="36" height="4" fill="#C8102E"/>
+              <rect x="16" y="0" width="4" height="36" fill="#C8102E"/>
+            </g>
+          </svg>
+        </a>
       </div>
     </header>
 
@@ -110,15 +149,8 @@
         <a href="mailto:ferrulli.walter@gmail.com">ferrulli.walter@gmail.com</a>
         <span>·</span>
         <a href="https://www.linkedin.com/in/walter-ferrulli/" target="_blank" rel="noopener">LinkedIn</a>
-        <span>·</span>
-        <a href="https://ferrulliwalter.github.io/Portfolio_eng/" target="_blank" rel="noopener">English</a>
       </div>
     </footer>
-  </div>
-
-  <!-- Lightbox per il mosaico -->
-  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Anteprima immagine">
-    <img id="lightImg" alt="Anteprima" src="" />
   </div>
 
   <script>
@@ -131,7 +163,8 @@
         full: "Ho guidato l'implementazione end‑to‑end di una Customer Data Platform per un primario produttore tedesco di fragranze. Il progetto ha integrato fonti dati eterogenee (vendite B2B e B2C online/offline e analytics comportamentali) in un unico data hub cross‑brand e cross‑country, con sistema di Business Intelligence proprietario. L'architettura ha abilitato use case strategici come Marketing Mix Modeling, recupero carrelli abbandonati e algoritmi di Next Best Action, migliorando le decisioni data‑driven, l'efficienza marketing e l'engagement su tutti i canali.",
         image: "image_2.png",
         link: "#",
-        tags: ["CDP", "Data Hub", "BI", "MMM/NBA", "Customer Analytics"]
+        tags: ["CDP", "Data Hub", "BI", "MMM/NBA", "Customer Analytics"],
+        keywords: ["Customer Data Platform","CDP","Business Intelligence","Next Best Action","Marketing Mix Modeling","data hub","engagement","cross‑country"]
       },
       {
         title: "Geointelligence – Brand automotive globale",
@@ -139,7 +172,8 @@
         full: "Ho progettato e implementato una soluzione avanzata di Geointelligence per ottimizzare la governance della rete di un gruppo automotive globale multi‑brand e multi‑paese. L'iniziativa ha integrato una suite leader di mercato per abilitare analisi di copertura, benchmark di performance e location intelligence. Sono stati integrati KPI real‑time, analisi competitor e simulazioni greenfield/scenario. La data strategy ha garantito ingestion, processing e visualizzazione consistenti tra regioni, combinando dati interni e di terze parti. Il risultato: decisioni più rapide e consapevoli su footprint, gap di copertura e priorità d'investimento.",
         image: "image_3.png",
         link: "#",
-        tags: ["GeoIntelligence", "Network Planning", "KPIs", "Location Intelligence"]
+        tags: ["GeoIntelligence", "Network Planning", "KPIs", "Location Intelligence"],
+        keywords: ["GeoIntelligence","Location Intelligence","KPI","greenfield","scenario","governance","benchmark"]
       },
       {
         title: "E‑commerce Full Potential – Leader globale nel settore eyewear",
@@ -147,7 +181,8 @@
         full: "Ho guidato per due anni un programma di potenziamento e‑commerce per un leader globale dell'eyewear. Mi sono occupato della gestione quotidiana delle operation, del miglioramento SEO e del coordinamento delle principali integrazioni tecniche su Shopify. Tra i risultati: attivazione di Shopify Payments, supporto a espansioni regionali e ottimizzazione delle automazioni di marketing. L'iniziativa ha snellito i processi, aumentato la visibilità organica e migliorato gli indicatori di vendita, in linea con i target di ricavo.",
         image: "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?q=80&w=1600&auto=format&fit=crop",
         link: "#",
-        tags: ["E‑commerce", "Shopify", "SEO", "Marketing Automation"]
+        tags: ["E‑commerce", "Shopify", "SEO", "Marketing Automation"],
+        keywords: ["Shopify","SEO","Marketing Automation","Payments","espansioni","e‑commerce"]
       },
       {
         title: "CRM & Loyalty – Brand globale nel settore Fashion e Retail",
@@ -155,7 +190,8 @@
         full: "Ho definito e implementato un programma CRM & Loyalty per un brand fashion globale: dalla strategia (naming, meccaniche, livelli, punti e reward) al business case per ROI e sostenibilità. Ho coordinato team Data & Analytics e IT per integrare logiche real‑time tra loyalty engine e sistemi cassa in negozio, abilitando segmentazioni in tempo reale. Ho implementato analytics avanzati, workflow di marketing automation e journey ottimizzati, favorendo il passaggio da un approccio transazionale a uno relazionale, con crescita della loyalty e impatto sul business.",
         image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop",
         link: "#",
-        tags: ["CRM", "Loyalty", "Customer Journeys", "Real‑time POS"]
+        tags: ["CRM", "Loyalty", "Customer Journeys", "Real‑time POS"],
+        keywords: ["CRM","Loyalty","Real‑time","POS","journey","analytics","automation"]
       },
       {
         title: "Ecosistema Influencer Marketing – Brand globale nel settore caffè",
@@ -163,7 +199,8 @@
         full: "Ho disegnato e implementato un ecosistema di Influencer Marketing per un produttore di macchine da caffè, integrato con CRM, marketing automation ed e‑commerce per semplificare le collaborazioni global/local. Ho definito governance e ruoli per garantire coerenza centrale con adattabilità locale, processi scalabili e strumenti avanzati per l'efficienza operativa. Ho creato un framework di budget e una roadmap di roll‑out per esecuzione puntuale e costo‑efficace. L'allineamento tra persone, processi e asset ha aumentato awareness, conversione e loyalty.",
         image: "https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1600&auto=format&fit=crop",
         link: "#",
-        tags: ["Influencer", "Governance", "Automation", "E‑commerce"]
+        tags: ["Influencer", "Governance", "Automation", "E‑commerce"],
+        keywords: ["Influencer","governance","automation","e‑commerce","roll‑out","budget"]
       }
     ];
 
@@ -176,7 +213,7 @@
         card.className = 'card';
         card.id = `p-${i}`;
         card.innerHTML = `
-          <img src="${p.image}" alt="${p.title}" data-idx="${i}" />
+          <img src="${p.image}" alt="${p.title}" data-idx="${i}" style="pointer-events:none; cursor:default;" />
           <div class="body">
             <h3>${p.title}</h3>
             <div style="color:var(--muted); font-size:14px">${p.desc}</div>
@@ -189,16 +226,8 @@
       });
     }
 
-    // Lightbox & navigazione a slideshow
-    const lightbox = document.getElementById('lightbox');
-    const lightImg = document.getElementById('lightImg');
+    // Navigazione a slideshow (solo pulsante Dettagli)
     grid.addEventListener('click', (e)=>{
-      const img = e.target.closest('img');
-      if(img){
-        lightImg.src = img.src;
-        lightbox.classList.add('open');
-        return;
-      }
       const showBtn = e.target.closest('[data-show-slide]');
       if(showBtn){
         const i = parseInt(showBtn.getAttribute('data-show-slide'),10);
@@ -210,7 +239,6 @@
         }
       }
     });
-    lightbox.addEventListener('click', ()=> lightbox.classList.remove('open'));
 
     // ======= SLIDESHOW =======
     const slidesEl = document.getElementById('slides');
@@ -219,11 +247,28 @@
     const slideDesc = document.getElementById('slideDesc');
     let idx = 0;
 
+    // Safe escape for regex specials
+    function escapeReg(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    // Evidenzia ANCHE sotto-stringhe (no confini di parola) – case-insensitive
+    function highlight(text, words){
+      if(!words || !words.length) return text;
+      let out = text;
+      const used = new Set();
+      words.forEach(w=>{
+        if(!w) return;
+        const key = String(w).toLowerCase();
+        if(used.has(key)) return; used.add(key);
+        const re = new RegExp(`(${escapeReg(String(w))})`, 'gi');
+        out = out.replace(re, '<strong>$1</strong>');
+      });
+      return out;
+    }
+
     function renderSlide(){
       const p = projects[idx];
       slideImage.src = p.image; slideImage.alt = p.title;
       slideTitle.textContent = p.title;
-      slideDesc.textContent = p.full; // testo completo nello slideshow (ITA)
+      slideDesc.innerHTML = highlight(p.full, p.keywords || p.tags);
     }
 
     document.getElementById('prev').onclick = ()=>{ idx = (idx - 1 + projects.length) % projects.length; renderSlide(); };
@@ -275,6 +320,16 @@
           firstBtn.click();
           console.assert(document.getElementById('slideTitle').textContent === projects[0].title, 'Click Dettagli (0) deve aprire lo slideshow sul progetto 0');
         }
+        // Verifica highlight (parola composta presente nel testo)
+        idx = 0; renderSlide();
+        console.assert(document.getElementById('slideDesc').innerHTML.includes('<strong>Customer Data Platform</strong>'), 'Highlight deve evidenziare "Customer Data Platform"');
+        // Verifica highlight di SOTTO-STRINGA (es. "form" dentro "Platform")
+        const sample = 'This is a Platform test.';
+        const h = highlight(sample, ['form']);
+        console.assert(h.includes('<strong>form</strong>'), 'Highlight deve evidenziare anche sotto-stringhe ("form" in "Platform")');
+        // Verifica immagini del mosaico non cliccabili
+        const firstImg = document.querySelector('.card img');
+        console.assert(firstImg && getComputedStyle(firstImg).pointerEvents === 'none', 'Le immagini nel mosaico non devono essere cliccabili');
         // Torna a mosaico
         setView('mosaic');
       }catch(err){
