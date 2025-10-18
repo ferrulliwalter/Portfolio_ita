@@ -48,7 +48,7 @@
     .slides{display:none; position:relative; background:var(--card); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
     .slides.active{display:block}
     .slide-img{width:100%; height:380px; object-fit:cover; display:block}
-        .slide-info{display:flex; justify-content:space-between; align-items:center; padding:12px 14px}
+    .slide-info{display:flex; justify-content:space-between; align-items:center; padding:12px 14px}
     .nav{position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 8px}
     .nav button{border:none; width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.35); color:#fff; font-size:18px; cursor:pointer}
 
@@ -266,8 +266,9 @@
 
     function renderSlide(){
       const p = projects[idx];
-      slideImage.src = p.image; slideImage.alt = p.title;
-      // Toggle fit mode per progetto (es. CDP "contain" per mostrare tutta la scritta)      slideTitle.textContent = p.title;
+      slideImage.src = p.image; 
+      slideImage.alt = p.title;
+      slideTitle.textContent = p.title;
       slideDesc.innerHTML = highlight(p.full, p.keywords || p.tags);
     }
 
@@ -286,7 +287,7 @@
       mosaicBtn.setAttribute('aria-selected', isMosaic);
       slideBtn.classList.toggle('active', !isMosaic);
       slideBtn.setAttribute('aria-selected', !isMosaic);
-      if(!isMosaic) renderSlide();
+      if(!isMosaic){ renderSlide(); }
     }
     mosaicBtn.onclick = ()=> setView('mosaic');
     slideBtn.onclick = ()=> setView('slides');
@@ -300,6 +301,8 @@
     // ======= INIT =======
     document.getElementById('year').textContent = new Date().getFullYear();
     renderGrid();
+    // Inizializza subito lo slideshow con i dati reali (idx=0) per evitare il placeholder "Titolo"
+    renderSlide();
     setView('mosaic');
 
     // ======= SELF-TEST (asserzioni extra) =======
@@ -314,16 +317,18 @@
         // avatar immagine
         const av = document.querySelector('img.avatar');
         console.assert(av && av.getAttribute('src') === 'image_1.jpg', 'L\'avatar deve essere image_1.jpg');
+        // Verifica che il titolo non sia il placeholder
+        setView('slides');
+        console.assert(document.getElementById('slideTitle').textContent === projects[idx].title, 'Lo slideshow deve mostrare il titolo corretto');
         // Simula click su "Dettagli" del primo progetto
         const firstBtn = document.querySelector('[data-show-slide="0"]');
         if(firstBtn){
           firstBtn.click();
-          console.assert(document.getElementById('slideTitle').textContent === projects[0].title, 'Click Dettagli (0) deve aprire lo slideshow sul progetto 0');
+          console.assert(document.getElementById('slideTitle').textContent === projects[0].title, 'Click Dettagli (0) deve aprire lo slideshow sul progetto 0 con titolo corretto');
         }
-        // Verifica highlight (parola composta presente nel testo)
+        // Verifica highlight (frase e sotto-stringa)
         idx = 0; renderSlide();
         console.assert(document.getElementById('slideDesc').innerHTML.includes('<strong>Customer Data Platform</strong>'), 'Highlight deve evidenziare "Customer Data Platform"');
-        // Verifica highlight di SOTTO-STRINGA (es. "form" dentro "Platform")
         const sample = 'This is a Platform test.';
         const h = highlight(sample, ['form']);
         console.assert(h.includes('<strong>form</strong>'), 'Highlight deve evidenziare anche sotto-stringhe ("form" in "Platform")');
