@@ -48,8 +48,7 @@
     .slides{display:none; position:relative; background:var(--card); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)}
     .slides.active{display:block}
     .slide-img{width:100%; height:380px; object-fit:cover; display:block}
-    .slide-img.contain{object-fit:contain; background:#0f1412;}
-    .slide-info{display:flex; justify-content:space-between; align-items:center; padding:12px 14px}
+        .slide-info{display:flex; justify-content:space-between; align-items:center; padding:12px 14px}
     .nav{position:absolute; top:50%; transform:translateY(-50%); width:100%; display:flex; justify-content:space-between; padding:0 8px}
     .nav button{border:none; width:44px; height:44px; border-radius:50%; background:rgba(0,0,0,.35); color:#fff; font-size:18px; cursor:pointer}
 
@@ -159,7 +158,10 @@
     // desc: 2 righe per mosaico; full: testo completo (ITA) per slideshow
     const projects = [
       {
-        title: "Customer Data Platform – Produttore di fragranze tedesco",$1image: "image_2.png", fit: "contain",
+        title: "Customer Data Platform – Produttore di fragranze tedesco",
+        desc: "Implementazione end‑to‑end di una CDP integrando fonti B2B/B2C online e offline. Creato data hub cross‑brand/paese e BI proprietaria.",
+        full: "Ho guidato l'implementazione end‑to‑end di una Customer Data Platform per un primario produttore tedesco di fragranze. Il progetto ha integrato fonti dati eterogenee (vendite B2B e B2C online/offline e analytics comportamentali) in un unico data hub cross‑brand e cross‑country, con sistema di Business Intelligence proprietario. L'architettura ha abilitato use case strategici come Marketing Mix Modeling, recupero carrelli abbandonati e algoritmi di Next Best Action, migliorando le decisioni data‑driven, l'efficienza marketing e l'engagement su tutti i canali.",
+        image: "image_2.png",
         link: "#",
         tags: ["CDP", "Data Hub", "BI", "MMM/NBA", "Customer Analytics"],
         keywords: ["Customer Data Platform","CDP","Business Intelligence","Next Best Action","Marketing Mix Modeling","data hub","engagement","cross‑country"]
@@ -265,9 +267,7 @@
     function renderSlide(){
       const p = projects[idx];
       slideImage.src = p.image; slideImage.alt = p.title;
-      // Toggle fit mode per progetto (es. CDP "contain" per mostrare tutta la scritta)
-      slideImage.classList.toggle('contain', p.fit === 'contain');
-      slideTitle.textContent = p.title;
+      // Toggle fit mode per progetto (es. CDP "contain" per mostrare tutta la scritta)      slideTitle.textContent = p.title;
       slideDesc.innerHTML = highlight(p.full, p.keywords || p.tags);
     }
 
